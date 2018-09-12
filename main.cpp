@@ -1,25 +1,27 @@
-#include "stdio.h"
+#include <stdio.h>
+#include <stdlib.h>
 
+void selection_sort(double * mas, size_t  size);
 //возвращает новое рандомное число от 0 до 1
 double new_rand()
 {
-	return rand() / RAND_MAX;
+	return (double)rand() / RAND_MAX;
 }
 
 //генерирует рандомный массив чисел
 void generated_rand_mas(double * mas, size_t size) 
 {
-	for (size_t i = 0; i <= size; i++)
+	for (size_t i = 0; i < size; i++)
 		mas[i] = new_rand();
 }
 
 //выводит на экран массив чисел
-void print(float * mas, size_t size)
+void print(double * mas, size_t size)
 {
 	for (size_t  i = 0; i < size; i++)
 	{
 		double pr = mas[i];
-		printf("%f ", pr);
+		printf("%lf ", pr);
 	}
 	printf("\n");
 }
@@ -27,21 +29,21 @@ void print(float * mas, size_t size)
 //смена элементов
 void swap(double &a, double &b)
 {
-	tmp = b;
-	a = b;
-	b = tmp;
+	double tmp = b;
+	b = a;
+	a = tmp;
 }
 
 //main
 int main(int argc, char * argv[])
 {
-	if (argc < 2) {
+	if (argc < 2) 
+	{
 		printf("Not found parameter\n");
 		return 1;
 	}
-
-	const int size;
-	double mas[size];
+	const int size = 10;
+	double* mas = new double [size];
 	int seed = atoi(argv[1]);
 
 	srand(seed);
@@ -63,11 +65,11 @@ void selection_sort(double * mas, size_t  size) {
 		int min_idx = idx_i;
 		for (size_t idx_j = idx_i + 1; idx_j < size; idx_j++)
 		{
-			if (mas[idx_j] < mas[min_idx]);
+			if (mas[idx_j] < mas[min_idx])
 			    min_idx = idx_j;
 		}
 
-		if (min_idx = idx_i) {
+		if (min_idx != idx_i) {
 			swap(mas[idx_i], mas[min_idx]);
 			min_idx = idx_i;
 		}
